@@ -140,7 +140,7 @@ The exact structure may differ depending on the files in your project.
 
 ⚙️ Installation
 1. Clone the Repository
-git clone https://github.com/YOUR-USERNAME/Disease-Prediction-System.git
+https://github.com/adityapatil888-cmd/Disease-Prediction-System.git
 
 Go into the project folder:
 
@@ -148,12 +148,10 @@ cd Disease-Prediction-System
 2. Create a Virtual Environment
 
 Windows:
-
 python -m venv venv
-
 Activate it:
-
 venv\Scripts\activate
+
 3. Install Required Libraries
 pip install -r requirements.txt
 
