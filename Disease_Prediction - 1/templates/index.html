@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Disease Prediction System</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            color: #f8fafc;
+
+            background:
+                radial-gradient(
+                    circle at 50% -20%,
+                    #24365f 0%,
+                    #17233a 35%,
+                    #0d1729 75%,
+                    #091221 100%
+                );
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================================
+           FLOATING BACKGROUND ICONS
+           ========================================= */
+
+        .background-icons {
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            overflow: hidden;
+
+            z-index: 0;
+        }
+
+
+        .background-icons span {
+
+            position: absolute;
+
+            font-size: 22px;
+
+            opacity: 0.18;
+
+            animation: floatIcon 8s ease-in-out infinite;
+        }
+
+
+        .icon1 {
+            top: 8%;
+            left: 4%;
+            color: #3b82f6;
+        }
+
+        .icon2 {
+            top: 18%;
+            right: 8%;
+            color: #8b5cf6;
+        }
+
+        .icon3 {
+            top: 42%;
+            left: 2%;
+            color: #06b6d4;
+        }
+
+        .icon4 {
+            top: 48%;
+            right: 5%;
+            color: #22c55e;
+        }
+
+        .icon5 {
+            top: 72%;
+            left: 7%;
+            color: #a855f7;
+        }
+
+        .icon6 {
+            top: 80%;
+            right: 10%;
+            color: #3b82f6;
+        }
+
+        .icon7 {
+            top: 28%;
+            left: 15%;
+            color: #ec4899;
+        }
+
+        .icon8 {
+            top: 65%;
+            right: 20%;
+            color: #06b6d4;
+        }
+
+
+        @keyframes floatIcon {
+
+            0%, 100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+
+        /* =========================================
+           MAIN WRAPPER
+           ========================================= */
+
+        .page {
+
+            position: relative;
+
+            z-index: 1;
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 55px 20px 35px;
+
+            text-align: center;
+        }
+
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+
+        .hero {
+
+            max-width: 900px;
+
+            margin: auto;
+        }
+
+
+        .hero h1 {
+
+            font-size: clamp(42px, 6vw, 72px);
+
+            line-height: 1.02;
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+
+            color: #f8fafc;
+
+            margin-bottom: 20px;
+        }
+
+
+        .hero h1 .highlight {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #3b82f6,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            background-clip: text;
+        }
+
+
+        .hero-subtitle {
+
+            max-width: 760px;
+
+            margin: auto;
+
+            color: #b8c4d7;
+
+            font-size: 19px;
+
+            line-height: 1.55;
+        }
+
+
+        /* =========================================
+           PROJECT CREDIT
+           ========================================= */
+
+        .project-credit {
+
+            margin-top: 15px;
+
+            color: #f19a9a;
+
+            font-size: 14px;
+
+            font-weight: 500;
+        }
+
+
+        /* =========================================
+           LINKEDIN
+           ========================================= */
+
+        .linkedin-link {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            margin-top: 10px;
+
+            padding: 6px 11px;
+
+            border-radius: 6px;
+
+            background: rgba(10, 102, 194, 0.12);
+
+            border: 1px solid rgba(96, 165, 250, 0.3);
+
+            color: #60a5fa;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            transition: 0.25s;
+        }
+
+
+        .linkedin-link:hover {
+
+            background: #0a66c2;
+
+            color: white;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 20px
+                rgba(10, 102, 194, 0.3);
+        }
+
+
+        .linkedin-icon {
+
+            width: 17px;
+
+            height: 17px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 3px;
+
+            background: #0a66c2;
+
+            color: white;
+
+            font-size: 10px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================================
+           MAIN CARD
+           ========================================= */
+
+        .prediction-card {
+
+            max-width: 1000px;
+
+            margin: 38px auto 0;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(30, 43, 65, 0.78);
+
+            border: 1px solid #34445e;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0, 0, 0, 0.3);
+
+            backdrop-filter: blur(12px);
+
+            text-align: left;
+        }
+
+
+        /* =========================================
+           CARD HEADER
+           ========================================= */
+
+        .card-header {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .card-header h2 {
+
+            color: #f1f5f9;
+
+            font-size: 24px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .card-header p {
+
+            color: #94a3b8;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           SYMPTOMS GRID
+           ========================================= */
+
+        .symptoms-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(210px, 1fr));
+
+            gap: 12px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .symptom {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            min-height: 58px;
+
+            padding: 13px 15px;
+
+            background:
+                rgba(31, 45, 67, 0.9);
+
+            border: 1px solid #40516b;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .symptom:hover {
+
+            background: #263a59;
+
+            border-color: #4f8df7;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 20px
+                rgba(37, 99, 235, 0.15);
+        }
+
+
+        .symptom input {
+
+            width: 18px;
+
+            height: 18px;
+
+            margin-right: 11px;
+
+            accent-color: #3b82f6;
+
+            cursor: pointer;
+        }
+
+
+        .symptom label {
+
+            color: #d5deeb;
+
+            font-size: 14px;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           BUTTONS
+           ========================================= */
+
+        .button {
+
+            width: 100%;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #4f46e5,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 25px
+                rgba(99, 102, 241, 0.25);
+
+            transition: 0.25s;
+        }
+
+
+        .button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(99, 102, 241, 0.4);
+        }
+
+
+        .clear-button {
+
+            width: 100%;
+
+            padding: 12px;
+
+            margin-top: 10px;
+
+            border: 1px solid #475569;
+
+            border-radius: 10px;
+
+            background: transparent;
+
+            color: #aebbd0;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .clear-button:hover {
+
+            background: rgba(255,255,255,0.05);
+
+            color: white;
+
+            border-color: #64748b;
+        }
+
+
+        /* =========================================
+           RESULT
+           ========================================= */
+
+        .result {
+
+            margin-top: 25px;
+
+            padding: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37, 99, 235, 0.15),
+                    rgba(124, 58, 237, 0.12)
+                );
+
+            border: 1px solid #42618a;
+
+            border-radius: 15px;
+
+            text-align: center;
+        }
+
+
+        .result h2 {
+
+            color: #93c5fd;
+
+            margin-bottom: 12px;
+
+            font-size: 22px;
+        }
+
+
+        .disease {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: #f87171;
+
+            margin: 10px;
+        }
+
+
+        .confidence {
+
+            color: #b7c3d5;
+
+            font-size: 15px;
+        }
+
+
+        .confidence strong {
+
+            color: #60a5fa;
+        }
+
+
+        /* =========================================
+           SELECTED SYMPTOMS
+           ========================================= */
+
+        .selected {
+
+            margin-top: 20px;
+
+            padding: 16px;
+
+            background:
+                rgba(15, 23, 42, 0.55);
+
+            border: 1px solid #334155;
+
+            border-radius: 10px;
+
+            text-align: left;
+
+            color: #cbd5e1;
+        }
+
+
+        .selected strong {
+
+            color: #f1f5f9;
+
+            display: block;
+
+            margin-bottom: 8px;
+        }
+
+
+        .selected ul {
+
+            padding-left: 20px;
+
+            line-height: 1.7;
+        }
+
+
+        .selected li {
+
+            color: #aebbd0;
+        }
+
+
+        /* =========================================
+           WARNING
+           ========================================= */
+
+        .warning {
+
+            max-width: 1000px;
+
+            margin: 22px auto 0;
+
+            padding: 14px 18px;
+
+            background:
+                rgba(120, 53, 15, 0.15);
+
+            border: 1px solid rgba(251, 146, 60, 0.25);
+
+            border-radius: 10px;
+
+            color: #fdba74;
+
+            font-size: 12px;
+
+            text-align: center;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           BOTTOM FEATURES
+           ========================================= */
+
+        .features {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+            max-width: 850px;
+
+            margin: 28px auto 0;
+        }
+
+
+        .feature {
+
+            padding: 13px;
+
+            border: 1px solid #2d3c54;
+
+            border-radius: 10px;
+
+            background:
+                rgba(24, 37, 57, 0.55);
+
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+
+        .feature span {
+
+            color: #60a5fa;
+
+            font-size: 18px;
+
+            margin-right: 5px;
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+
+                padding-top: 35px;
+            }
+
+
+            .hero h1 {
+
+                font-size: 42px;
+
+                letter-spacing: -1px;
+            }
+
+
+            .hero-subtitle {
+
+                font-size: 16px;
+            }
+
+
+            .prediction-card {
+
+                padding: 20px;
+
+                margin-top: 28px;
+            }
+
+
+            .symptoms-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .features {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .hero h1 {
+
+                font-size: 34px;
+            }
+
+
+            .prediction-card {
+
+                padding: 16px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     BACKGROUND DECORATIONS
+     ========================================= -->
+
+<div class="background-icons">
+
+    <span class="icon1">✦</span>
+
+    <span class="icon2">✧</span>
+
+    <span class="icon3">⌁</span>
+
+    <span class="icon4">✚</span>
+
+    <span class="icon5">✦</span>
+
+    <span class="icon6">⌁</span>
+
+    <span class="icon7">✧</span>
+
+    <span class="icon8">✚</span>
+
+</div>
+
+
+
+<div class="page">
+
+
+    <!-- =========================================
+         HERO
+         ========================================= -->
+
+    <section class="hero">
+
+        <h1>
+            Predict your
+            <span class="highlight">
+                disease
+            </span>
+            with confidence
+        </h1>
+
+
+        <p class="hero-subtitle">
+
+            Select your symptoms and let our
+            machine learning model analyze the
+            patterns to provide a disease prediction.
+
+        </p>
+
+
+        <div class="project-credit">
+
+            Project by Aditya B. Patil,
+            Electrical Engineering
+
+        </div>
+
+
+        <a
+            href="https://www.linkedin.com/in/aditya-patil-876b65313"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="linkedin-link">
+
+            <span class="linkedin-icon">
+                in
+            </span>
+
+            Connect on LinkedIn
+
+        </a>
+
+    </section>
+
+
+
+    <!-- =========================================
+         PREDICTION CARD
+         ========================================= -->
+
+    <div class="prediction-card">
+
+
+        <div class="card-header">
+
+            <h2>
+                🩺 Select Your Symptoms
+            </h2>
+
+            <p>
+                Choose all symptoms that you are experiencing
+            </p>
+
+        </div>
+
+
+
+        <form method="POST">
+
+
+            <div class="symptoms-grid">
+
+
+                {% for symptom in symptoms %}
+
+                <div class="symptom">
+
+
+                    <input
+                        type="checkbox"
+                        id="{{ symptom }}"
+                        name="symptoms"
+                        value="{{ symptom }}"
+
+                        {% if symptom in selected_symptoms %}
+                        checked
+                        {% endif %}
+                    >
+
+
+                    <label for="{{ symptom }}">
+
+                        {{ symptom.replace('_', ' ').title() }}
+
+                    </label>
+
+
+                </div>
+
+                {% endfor %}
+
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="button">
+
+                🔍 Predict Disease
+
+            </button>
+
+
+            <button
+                type="button"
+                class="clear-button"
+                onclick="clearSymptoms()">
+
+                Clear All Symptoms
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- =========================================
+             PREDICTION RESULT
+             ========================================= -->
+
+        {% if prediction %}
+
+        <div class="result">
+
+
+            <h2>
+                ✨ Prediction Result
+            </h2>
+
+
+            {% if confidence %}
+
+            <div class="disease">
+
+                {{ prediction }}
+
+            </div>
+
+
+            <p class="confidence">
+
+                Model Confidence:
+
+                <strong>
+                    {{ confidence }}%
+                </strong>
+
+            </p>
+
+
+            {% else %}
+
+            <div class="disease">
+
+                {{ prediction }}
+
+            </div>
+
+            {% endif %}
+
+
+
+            {% if selected_symptoms %}
+
+            <div class="selected">
+
+
+                <strong>
+                    Selected Symptoms:
+                </strong>
+
+
+                <ul>
+
+                    {% for symptom in selected_symptoms %}
+
+                    <li>
+
+                        {{ symptom.replace('_', ' ').title() }}
+
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         WARNING
+         ========================================= -->
+
+    <div class="warning">
+
+        ⚠️ <strong>Important:</strong>
+
+        This project is created for educational
+        and demonstration purposes only.
+
+        The prediction is not a medical diagnosis.
+        Consult a qualified healthcare professional
+        for medical advice.
+
+    </div>
+
+
+
+    <!-- =========================================
+         FEATURES
+         ========================================= -->
+
+    <div class="features">
+
+        <div class="feature">
+
+            <span>🧠</span>
+
+            Machine Learning Based
+
+        </div>
+
+
+        <div class="feature">
+
+            <span>🔒</span>
+
+            Educational & Secure
+
+        </div>
+
+
+        <div class="feature">
+
+            <span>⚡</span>
+
+            Fast Prediction
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+function clearSymptoms() {
+
+    const checkboxes =
+        document.querySelectorAll(
+            'input[type="checkbox"]'
+        );
+
+
+    checkboxes.forEach(
+
+        checkbox => {
+
+            checkbox.checked = false;
+
+        }
+
+    );
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
